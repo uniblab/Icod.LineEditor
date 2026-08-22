@@ -13,7 +13,7 @@ using Icod.CommandFramework.RegularExpressions;
 /// </summary>
 public static class Command {
 	private const string ProgramName = "ed";
-	private const string Version = "ed (Icod.CoreUtils) 1.0; GNU ed 1.22.5 compatibility profile";
+	private const string Version = "ed (Icod.LineEditor) 1.0; GNU ed 1.22.5 compatibility profile";
 	private static readonly ReadOnlyMemory<byte> LineFeed = new byte[] { (byte)'\n' };
 
 	/// <summary>Runs the command synchronously for compatibility.</summary>

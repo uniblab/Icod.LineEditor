@@ -15,7 +15,7 @@ using Icod.CommandFramework.RegularExpressions;
 /// </summary>
 public static class Command {
 	private const string ProgramName = "red";
-	private const string Version = "red (Icod.CoreUtils) 1.0; GNU ed 1.22.5 restricted compatibility profile";
+	private const string Version = "red (Icod.LineEditor) 1.0; GNU ed 1.22.5 restricted compatibility profile";
 	private static readonly ReadOnlyMemory<byte> LineFeed = new byte[] { (byte)'\n' };
 
 	/// <summary>Runs the command synchronously for compatibility.</summary>
