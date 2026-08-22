@@ -1,9 +1,59 @@
-#!/usr/bin/env bash
-set -euo pipefail
+#!/usr/bin/env sh
+set -eu
 
-configuration="${1:-Staging}"
+clean()
+{
+    printf '\n=== Clean ===\n'
+    dotnet clean Icod.LineEditor.sln -c Debug
+}
 
-dotnet clean Icod.LineEditor.sln -c "$configuration"
-dotnet restore Icod.LineEditor.sln
-dotnet build Icod.LineEditor.sln -c "$configuration" --no-restore
-dotnet test Icod.LineEditor.sln -c "$configuration" --no-build
+restore()
+{
+    printf '\n=== Restore ===\n'
+    dotnet restore Icod.LineEditor.sln
+}
+
+build()
+{
+    printf '\n=== Build ===\n'
+    dotnet build Icod.LineEditor.sln -c Debug --no-restore
+}
+
+test()
+{
+    printf '\n=== Test ===\n'
+    dotnet test Icod.LineEditor.sln  \
+        -c Debug \
+        --no-build
+}
+
+case "${1-}" in
+    "")
+        clean
+        restore
+        build
+        test
+        ;;
+
+    clean)
+        clean
+        ;;
+
+    restore)
+        restore
+        ;;
+
+    build)
+        build
+        ;;
+
+    test)
+        test
+        ;;
+
+    *)
+        printf 'Invalid section: %s\n' "$1" >&2
+        printf 'Usage: %s [clean|restore|build|test]\n' "$0" >&2
+        exit 1
+        ;;
+esac
