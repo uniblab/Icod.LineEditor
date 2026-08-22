@@ -9,7 +9,7 @@ using Xunit;
 public sealed class CommandTests {
 	[Theory]
 	[InlineData( "--help", "Usage: red" )]
-	[InlineData( "--version", "red (Icod.CoreUtils)" )]
+	[InlineData( "--version", "red (Icod.LineEditor)" )]
 	public async Task ReportsRedHelpAndVersion(
 		string option,
 		string expected
