@@ -1,6 +1,6 @@
 # Icod.LineEditor
 
-![Icod.LineEditor](https://raw.githubusercontent.com/uniblab/Icod.LineEditor/v1.1.1/LineEditor.banner.png)
+![Icod.LineEditor](https://raw.githubusercontent.com/uniblab/Icod.LineEditor/v1.1.1/Icod.LineEditor.banner.png)
 
 [![PR Staging build](https://github.com/uniblab/Icod.LineEditor/actions/workflows/pull-request.yaml/badge.svg?event=pull_request)](https://github.com/uniblab/Icod.LineEditor/actions/workflows/pull-request.yaml)
 [![Main Release validation](https://github.com/uniblab/Icod.LineEditor/actions/workflows/main.yaml/badge.svg?branch=main)](https://github.com/uniblab/Icod.LineEditor/actions/workflows/main.yaml)
