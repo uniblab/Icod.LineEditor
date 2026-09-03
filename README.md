@@ -28,7 +28,44 @@ lineeditor sed [OPTION]...
 
 It calls the managed command implementations directly and does not spawn the standalone executables. The standalone `ed`, `red`, and `sed` programs remain first-class build and release outputs.
 
-Each executable directory contains a dedicated man-page-style `README.md` describing its implemented command-line profile, behavior, exit status, platform notes, authorship, and licensing.
+## Installation and distribution
+
+The distribution router is published as the .NET tool package `Icod.LineEditor.Tools`. Install the current published version with:
+
+```text
+dotnet tool install --global Icod.LineEditor.Tools
+```
+
+The installed command is:
+
+```text
+lineeditor
+```
+
+Use the router to select an editor:
+
+```text
+lineeditor ed --help
+lineeditor red --help
+lineeditor sed --help
+```
+
+A missing or unknown router command is a usage error. `lineeditor --help` lists the supported commands and `lineeditor --version` reports the router version. Once a command is selected, arguments and standard streams are passed directly to the managed command implementation and its exit status is returned.
+
+Tagged releases also provide framework-dependent ZIP archives for Windows, Linux, and macOS on x64 and ARM64. Each archive contains all four executable entry points:
+
+```text
+lineeditor
+ed
+red
+sed
+```
+
+Windows archive entries use the `.exe` suffix. Archives also contain the repository `README.md` and `LICENSE` and require the .NET 10 runtime.
+
+**This repository root `README.md` is also the NuGet package README for `Icod.LineEditor.Tools`.** The router project packs this file at the package root as `README.md`, so the NuGet landing page and repository overview share the same installation, architecture, compatibility, and licensing documentation.
+
+The narrower [`lineeditor/README.md`](lineeditor/README.md) documents the router itself; it is not the NuGet package README.
 
 ## `Icod.LineEditor.Ed.Shared`
 
@@ -144,7 +181,9 @@ The repository follows the canonical `uniblab/.github` lifecycle:
 
 Executable release archives are produced for `win-x64`, `win-arm64`, `linux-x64`, `linux-arm64`, `osx-x64`, and `osx-arm64`. Each archive contains `lineeditor`, `ed`, `red`, and `sed` (with `.exe` suffixes on Windows), plus the repository `README.md` and `LICENSE`.
 
-The `Icod.LineEditor.Tools` router is packable as a .NET tool whose installed command is `lineeditor`. Package publication is version-gated by the actual generated nuspec version. See [`packaging/README.md`](packaging/README.md) for the build and distribution contract.
+The `Icod.LineEditor.Tools` router is a .NET tool package whose installed command is `lineeditor`. Package publication is version-gated by the actual generated nuspec version. NuGet.org Trusted Publishing must authorize the `Icod.LineEditor.Tools` package for repository `uniblab/Icod.LineEditor`, workflow `release.yaml`, and environment `Release`.
+
+See [`packaging/README.md`](packaging/README.md) for the complete build, validation, archive, package-publication, and release contract.
 
 ## Project layout
 
@@ -180,7 +219,7 @@ The executable tools `lineeditor`, `ed`, `red`, and `sed` are distributed under 
 
 `Icod.LineEditor.Ed.Shared` is distributed under the GNU Lesser General Public License, version 3 or later. See [`Icod.LineEditor.Ed.Shared/LICENSE`](Icod.LineEditor.Ed.Shared/LICENSE).
 
-The build projects copy their local `README.md` and `LICENSE` into the output directory as `$(AssemblyName).README.md` and `$(AssemblyName).LICENSE.txt` respectively where configured.
+The `Icod.LineEditor.Tools` NuGet package includes the repository root `README.md` and `LICENSE`. Runtime-specific executable archives likewise include the root `README.md` and `LICENSE` alongside `lineeditor`, `ed`, `red`, and `sed`.
 
 ## Upstream inspiration and authorship
 
