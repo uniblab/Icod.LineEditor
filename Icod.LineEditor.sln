@@ -10,6 +10,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Icod.LineEditor.Red", "red\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Icod.LineEditor.Sed", "sed\Icod.LineEditor.Sed.csproj", "{58B05E59-4BFE-41B1-9E0C-F161547F7362}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Icod.LineEditor.Router", "lineeditor\Icod.LineEditor.Router.csproj", "{6FD0A77C-ECA4-47F4-8B17-87C41BE61301}"
+EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{9E7C04E6-2E76-4D11-89BD-14C238881678}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Icod.LineEditor.Ed.Shared.Tests", "tests\Ed.Shared.Tests\Icod.LineEditor.Ed.Shared.Tests.csproj", "{F05B4136-23C6-4CF5-8A6A-920F20DC0101}"
@@ -19,6 +21,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Icod.LineEditor.Red.Tests", "tests\Red.Tests\Icod.LineEditor.Red.Tests.csproj", "{F05B4136-23C6-4CF5-8A6A-920F20DC0103}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Icod.LineEditor.Sed.Tests", "tests\Sed.Tests\Icod.LineEditor.Sed.Tests.csproj", "{F05B4136-23C6-4CF5-8A6A-920F20DC0006}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Icod.LineEditor.Router.Tests", "tests\Router.Tests\Icod.LineEditor.Router.Tests.csproj", "{F05B4136-23C6-4CF5-8A6A-920F20DC0104}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +55,12 @@ Global
 		{58B05E59-4BFE-41B1-9E0C-F161547F7362}.Staging|Any CPU.Build.0 = Staging|Any CPU
 		{58B05E59-4BFE-41B1-9E0C-F161547F7362}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{58B05E59-4BFE-41B1-9E0C-F161547F7362}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6FD0A77C-ECA4-47F4-8B17-87C41BE61301}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FD0A77C-ECA4-47F4-8B17-87C41BE61301}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FD0A77C-ECA4-47F4-8B17-87C41BE61301}.Staging|Any CPU.ActiveCfg = Staging|Any CPU
+		{6FD0A77C-ECA4-47F4-8B17-87C41BE61301}.Staging|Any CPU.Build.0 = Staging|Any CPU
+		{6FD0A77C-ECA4-47F4-8B17-87C41BE61301}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FD0A77C-ECA4-47F4-8B17-87C41BE61301}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F05B4136-23C6-4CF5-8A6A-920F20DC0101}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F05B4136-23C6-4CF5-8A6A-920F20DC0101}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F05B4136-23C6-4CF5-8A6A-920F20DC0101}.Staging|Any CPU.ActiveCfg = Staging|Any CPU
@@ -75,6 +85,12 @@ Global
 		{F05B4136-23C6-4CF5-8A6A-920F20DC0006}.Staging|Any CPU.Build.0 = Staging|Any CPU
 		{F05B4136-23C6-4CF5-8A6A-920F20DC0006}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F05B4136-23C6-4CF5-8A6A-920F20DC0006}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F05B4136-23C6-4CF5-8A6A-920F20DC0104}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F05B4136-23C6-4CF5-8A6A-920F20DC0104}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F05B4136-23C6-4CF5-8A6A-920F20DC0104}.Staging|Any CPU.ActiveCfg = Staging|Any CPU
+		{F05B4136-23C6-4CF5-8A6A-920F20DC0104}.Staging|Any CPU.Build.0 = Staging|Any CPU
+		{F05B4136-23C6-4CF5-8A6A-920F20DC0104}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F05B4136-23C6-4CF5-8A6A-920F20DC0104}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -84,5 +100,6 @@ Global
 		{F05B4136-23C6-4CF5-8A6A-920F20DC0102} = {9E7C04E6-2E76-4D11-89BD-14C238881678}
 		{F05B4136-23C6-4CF5-8A6A-920F20DC0103} = {9E7C04E6-2E76-4D11-89BD-14C238881678}
 		{F05B4136-23C6-4CF5-8A6A-920F20DC0006} = {9E7C04E6-2E76-4D11-89BD-14C238881678}
+		{F05B4136-23C6-4CF5-8A6A-920F20DC0104} = {9E7C04E6-2E76-4D11-89BD-14C238881678}
 	EndGlobalSection
 EndGlobal
