@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<OutputType>Exe</OutputType>
@@ -16,6 +17,7 @@
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="Icod.CommandFramework" Version="2.1.0" />
+		<PackageReference Include="Icod.Processes" Version="1.2.0" />
 	</ItemGroup>
 	<ItemGroup>
 		<InternalsVisibleTo Include="Icod.LineEditor.Sed.Tests" />
