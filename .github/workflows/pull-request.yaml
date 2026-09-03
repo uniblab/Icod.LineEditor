@@ -66,3 +66,7 @@ jobs:
         if: matrix.verify_packages
         shell: pwsh
         run: ./packaging/VerifyPackageArtifact.ps1 -ArtifactDirectory artifacts -Configuration '${{ env.CONFIGURATION }}' -AllowNoPackages
+      - name: Smoke linux-x64 release archive construction
+        if: matrix.verify_packages
+        shell: pwsh
+        run: ./packaging/BuildReleaseArchive.ps1 -Configuration '${{ env.CONFIGURATION }}' -RuntimeIdentifier 'linux-x64' -Version 'pr'
