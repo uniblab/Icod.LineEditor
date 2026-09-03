@@ -17,6 +17,7 @@
 		<Description>Managed command router for the Icod.LineEditor ed, red, and sed tools.</Description>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
+		<PackageIcon>icon.png</PackageIcon>
 	</PropertyGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\ed\Icod.LineEditor.Ed.csproj" />
@@ -26,6 +27,7 @@
 	<ItemGroup>
 		<Content Include="..\README.md" Link="README.md" Pack="true" PackagePath="\" />
 		<Content Include="..\LICENSE" Link="LICENSE" Pack="true" PackagePath="\" />
+		<None Include="..\icon.png" Pack="true" PackagePath="" />
 	</ItemGroup>
 	<PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
 		<WarningLevel>2</WarningLevel>
