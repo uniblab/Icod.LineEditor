@@ -41,6 +41,11 @@ function Get-ExecutableProjects {
     param([Parameter(Mandatory = $true)][string[]]$ProjectPaths,[string]$Configuration = 'Release')
     $result = @()
     foreach ($projectPath in $ProjectPaths) {
+        $isTestProject = Get-MSBuildProperty -ProjectPath $projectPath -Name 'IsTestProject' -Configuration $Configuration
+        if ('true' -eq $isTestProject.Trim().ToLowerInvariant()) {
+            continue
+        }
+
         $outputType = Get-MSBuildProperty -ProjectPath $projectPath -Name 'OutputType' -Configuration $Configuration
         if ($outputType -in @('Exe', 'WinExe')) {
             $assemblyName = Get-MSBuildProperty -ProjectPath $projectPath -Name 'AssemblyName' -Configuration $Configuration

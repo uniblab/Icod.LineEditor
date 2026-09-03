@@ -6,5 +6,6 @@
 		<PackageVersion>$(VersionPrefix)</PackageVersion>
 		<AssemblyVersion>$(VersionPrefix).0</AssemblyVersion>
 		<FileVersion>$(VersionPrefix).0</FileVersion>
+		<SelfContained>false</SelfContained>
 	</PropertyGroup>
 </Project>
