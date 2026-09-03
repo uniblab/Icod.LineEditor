@@ -19,7 +19,7 @@
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\..\sed\Icod.LineEditor.Sed.csproj" />
-		<PackageReference Include="Icod.CommandFramework" Version="1.1.0" />
+		<PackageReference Include="Icod.CommandFramework" Version="2.1.0" />
 	</ItemGroup>
 	<PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
 		<ErrorReport>prompt</ErrorReport>
