@@ -21,7 +21,7 @@
 	<ItemGroup>
 		<ProjectReference Include="..\..\red\Icod.LineEditor.Red.csproj" />
 		<ProjectReference Include="..\..\ed\Icod.LineEditor.Ed.csproj" />
-		<PackageReference Include="Icod.CommandFramework" Version="1.1.0" />
+		<PackageReference Include="Icod.CommandFramework" Version="2.1.0" />
 	</ItemGroup>
 	<PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
 		<ErrorReport>prompt</ErrorReport>
