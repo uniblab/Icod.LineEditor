@@ -30,10 +30,10 @@ It calls the managed command implementations directly and does not spawn the sta
 
 ## Installation and distribution
 
-The distribution router is published as the .NET tool package `Icod.LineEditor.Tools`. Install the current published version with:
+The distribution router is published as the .NET tool package `Icod.LineEditor.Tools`. Install version `1.1.0` with:
 
 ```text
-dotnet tool install --global Icod.LineEditor.Tools
+dotnet tool install --global Icod.LineEditor.Tools --version 1.1.0
 ```
 
 The installed command is:
@@ -171,6 +171,12 @@ dotnet test Icod.LineEditor.sln -c Staging --no-build --no-restore
 
 The solution defines `Debug`, `Staging`, and `Release` configurations. Release builds treat compiler warnings as errors except for documentation warning `CS1591`.
 
+## Versioning
+
+Repository versioning is centralized in the root [`Directory.Build.props`](Directory.Build.props). `VersionPrefix` is the single authoritative release-version literal and is currently `1.1.0`. `Version`, `PackageVersion`, `AssemblyVersion`, and `FileVersion` are derived from it for projects in the repository.
+
+For a tagged release, the `v<semver>` tag must agree with the generated NuGet package version. The release workflow selects packages by their actual nuspec version, so a mismatched tag cannot silently publish a differently versioned package.
+
 ## Continuous integration and release
 
 The repository follows the canonical `uniblab/.github` lifecycle:
@@ -189,6 +195,7 @@ See [`packaging/README.md`](packaging/README.md) for the complete build, validat
 
 ```text
 Icod.LineEditor/
+├── Directory.Build.props          centralized repository version
 ├── Icod.LineEditor.Ed.Shared/    mutable Ed/Red engine
 ├── ed/                           standard line editor
 ├── red/                          restricted line editor
