@@ -18,6 +18,7 @@
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
 		<PackageIcon>icon.png</PackageIcon>
+		<PackageTags>dotnet;csharp;line-editor;text-editor;stream-editor;ed;red;sed;gnu;unix;linux;windows;macos;cross-platform;command-line;cli;terminal;text-processing;regex;posix</PackageTags>
 	</PropertyGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\ed\Icod.LineEditor.Ed.csproj" />
