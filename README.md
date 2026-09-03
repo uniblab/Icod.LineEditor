@@ -93,7 +93,7 @@ The permanent dependency direction is:
 
 ```text
 Published neutral foundation
-    Icod.CommandFramework 1.1.0
+    Icod.CommandFramework 2.1.0
             ↓ PackageReference
     ┌──────────────────────────────┐
     │ Icod.LineEditor.Ed.Shared    │
@@ -101,7 +101,7 @@ Published neutral foundation
           ↓ ProjectReference
        ed             red
 
-    Icod.CommandFramework 1.1.0
+    Icod.CommandFramework 2.1.0
             ↓ PackageReference
            sed
 
