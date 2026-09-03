@@ -1,5 +1,7 @@
 # Icod.LineEditor
 
+![Icod.LineEditor](https://raw.githubusercontent.com/uniblab/Icod.LineEditor/main/Icod.LineEditor.banner.png)
+
 [![PR Staging build](https://github.com/uniblab/Icod.LineEditor/actions/workflows/pull-request.yaml/badge.svg?event=pull_request)](https://github.com/uniblab/Icod.LineEditor/actions/workflows/pull-request.yaml)
 [![Main Release validation](https://github.com/uniblab/Icod.LineEditor/actions/workflows/main.yaml/badge.svg?branch=main)](https://github.com/uniblab/Icod.LineEditor/actions/workflows/main.yaml)
 
@@ -8,6 +10,14 @@
 The repository targets .NET 10 and C# 13 and is designed for Windows, Linux, and macOS. The editors use managed code for their editing, regular-expression, record-processing, and command orchestration behavior rather than invoking the host system's `ed`, `red`, or `sed` executable.
 
 This repository is the permanent home of the LineEditor family extracted from the former multi-suite `Icod.CoreUtils` development repository during Completion Gate G7.
+
+## SEO keywords and repository topics
+
+The canonical discovery vocabulary for the NuGet package and GitHub repository is:
+
+`dotnet`, `csharp`, `line-editor`, `text-editor`, `stream-editor`, `ed`, `red`, `sed`, `gnu`, `unix`, `linux`, `windows`, `macos`, `cross-platform`, `command-line`, `cli`, `terminal`, `text-processing`, `regex`, `posix`.
+
+The same terms are emitted as `PackageTags` by `Icod.LineEditor.Tools` so package and repository discovery stay aligned.
 
 ## Included commands
 
@@ -30,10 +40,10 @@ It calls the managed command implementations directly and does not spawn the sta
 
 ## Installation and distribution
 
-The distribution router is published as the .NET tool package `Icod.LineEditor.Tools`. Install version `1.1.0` with:
+The distribution router is published as the .NET tool package `Icod.LineEditor.Tools`. Install version `1.1.1` with:
 
 ```text
-dotnet tool install --global Icod.LineEditor.Tools --version 1.1.0
+dotnet tool install --global Icod.LineEditor.Tools --version 1.1.1
 ```
 
 The installed command is:
@@ -93,7 +103,7 @@ The permanent dependency direction is:
 
 ```text
 Published neutral foundation
-    Icod.CommandFramework 1.1.0
+    Icod.CommandFramework 2.1.0
             ↓ PackageReference
     ┌──────────────────────────────┐
     │ Icod.LineEditor.Ed.Shared    │
@@ -101,7 +111,7 @@ Published neutral foundation
           ↓ ProjectReference
        ed             red
 
-    Icod.CommandFramework 1.1.0
+    Icod.CommandFramework 2.1.0
             ↓ PackageReference
            sed
 
@@ -173,7 +183,7 @@ The solution defines `Debug`, `Staging`, and `Release` configurations. Release b
 
 ## Versioning
 
-Repository versioning is centralized in the root [`Directory.Build.props`](Directory.Build.props). `VersionPrefix` is the single authoritative release-version literal and is currently `1.1.0`. `Version`, `PackageVersion`, `AssemblyVersion`, and `FileVersion` are derived from it for projects in the repository.
+Repository versioning is centralized in the root [`Directory.Build.props`](Directory.Build.props). `VersionPrefix` is the single authoritative release-version literal and is currently `1.1.1`. `Version`, `PackageVersion`, `AssemblyVersion`, and `FileVersion` are derived from it for projects in the repository.
 
 For a tagged release, the `v<semver>` tag must agree with the generated NuGet package version. The release workflow selects packages by their actual nuspec version, so a mismatched tag cannot silently publish a differently versioned package.
 

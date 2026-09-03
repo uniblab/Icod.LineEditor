@@ -20,7 +20,7 @@
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\..\Icod.LineEditor.Ed.Shared\Icod.LineEditor.Ed.Shared.csproj" />
-		<PackageReference Include="Icod.CommandFramework" Version="1.1.0" />
+		<PackageReference Include="Icod.CommandFramework" Version="2.1.0" />
 	</ItemGroup>
 	<ItemGroup>
 		<None Update="fixtures\**\*" CopyToOutputDirectory="PreserveNewest" />

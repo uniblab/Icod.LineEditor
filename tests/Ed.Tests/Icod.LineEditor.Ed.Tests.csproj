@@ -20,7 +20,7 @@
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\..\ed\Icod.LineEditor.Ed.csproj" />
-		<PackageReference Include="Icod.CommandFramework" Version="1.1.0" />
+		<PackageReference Include="Icod.CommandFramework" Version="2.1.0" />
 	</ItemGroup>
 	<ItemGroup>
 		<None Include="..\Ed.Shared.Tests\fixtures\**\*" Link="fixtures\%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
