@@ -7,59 +7,47 @@
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
-		<IsPackable>false</IsPackable>
-		<OutputPath>..\bin\$(Configuration)\</OutputPath>
-		<AssemblyName>ed</AssemblyName>
-		<RootNamespace>Icod.LineEditor.Ed</RootNamespace>
-	</PropertyGroup>
-	<PropertyGroup Condition=" '$(PlatformTarget)' == '' ">
-		<PlatformTarget>AnyCPU</PlatformTarget>
+		<AssemblyName>lineeditor</AssemblyName>
+		<RootNamespace>Icod.LineEditor.Router</RootNamespace>
+		<Configurations>Debug;Release;Staging</Configurations>
+		<PackAsTool>true</PackAsTool>
+		<ToolCommandName>lineeditor</ToolCommandName>
+		<PackageId>Icod.LineEditor.Tools</PackageId>
+		<Authors>Timothy J. Bruce</Authors>
+		<Description>Managed command router for the Icod.LineEditor ed, red, and sed tools.</Description>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
 	</PropertyGroup>
 	<ItemGroup>
-		<ProjectReference Include="..\Icod.LineEditor.Ed.Shared\Icod.LineEditor.Ed.Shared.csproj" />
-		<PackageReference Include="Icod.CommandFramework" Version="1.1.0" />
+		<ProjectReference Include="..\ed\Icod.LineEditor.Ed.csproj" />
+		<ProjectReference Include="..\red\Icod.LineEditor.Red.csproj" />
+		<ProjectReference Include="..\sed\Icod.LineEditor.Sed.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+		<Content Include="..\README.md" Link="README.md" Pack="true" PackagePath="\" />
+		<Content Include="..\LICENSE" Link="LICENSE" Pack="true" PackagePath="\" />
 	</ItemGroup>
 	<PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-		<ErrorReport>prompt</ErrorReport>
 		<WarningLevel>2</WarningLevel>
 		<DebugSymbols>true</DebugSymbols>
 		<DebugType>full</DebugType>
 		<Optimize>false</Optimize>
 		<DefineConstants>DEBUG;TRACE</DefineConstants>
-		<SignAssembly>false</SignAssembly>
 		<TreatWarningsAsErrors>false</TreatWarningsAsErrors>
 	</PropertyGroup>
 	<PropertyGroup Condition=" '$(Configuration)' == 'Staging' ">
-		<ErrorReport>prompt</ErrorReport>
 		<WarningLevel>3</WarningLevel>
 		<DebugSymbols>true</DebugSymbols>
 		<DebugType>full</DebugType>
 		<Optimize>false</Optimize>
 		<DefineConstants>TRACE</DefineConstants>
-		<SignAssembly>false</SignAssembly>
 		<TreatWarningsAsErrors>false</TreatWarningsAsErrors>
 	</PropertyGroup>
 	<PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-		<ErrorReport>prompt</ErrorReport>
 		<WarningLevel>4</WarningLevel>
-		<DebugType>pdbonly</DebugType>
+		<DebugType>portable</DebugType>
 		<Optimize>true</Optimize>
-		<SignAssembly>false</SignAssembly>
 		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
 		<WarningsNotAsErrors>CS1591</WarningsNotAsErrors>
 	</PropertyGroup>
-	<ItemGroup>
-		<Content Include="README.md">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-			<TargetPath>$(AssemblyName).README.md</TargetPath>
-			<Pack>true</Pack>
-			<PackagePath>\</PackagePath>
-		</Content>
-		<Content Include="LICENSE">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-			<TargetPath>$(AssemblyName).LICENSE.txt</TargetPath>
-			<Pack>true</Pack>
-			<PackagePath>\</PackagePath>
-		</Content>
-	</ItemGroup>
 </Project>

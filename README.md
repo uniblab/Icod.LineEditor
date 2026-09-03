@@ -1,5 +1,8 @@
 # Icod.LineEditor
 
+[![PR Staging build](https://github.com/uniblab/Icod.LineEditor/actions/workflows/pull-request.yaml/badge.svg?event=pull_request)](https://github.com/uniblab/Icod.LineEditor/actions/workflows/pull-request.yaml)
+[![Main Release validation](https://github.com/uniblab/Icod.LineEditor/actions/workflows/main.yaml/badge.svg?branch=main)](https://github.com/uniblab/Icod.LineEditor/actions/workflows/main.yaml)
+
 `Icod.LineEditor` is a managed .NET implementation of the classic Unix line-editing family: `ed`, its restricted form `red`, and the `sed` stream editor.
 
 The repository targets .NET 10 and C# 13 and is designed for Windows, Linux, and macOS. The editors use managed code for their editing, regular-expression, record-processing, and command orchestration behavior rather than invoking the host system's `ed`, `red`, or `sed` executable.
@@ -10,11 +13,59 @@ This repository is the permanent home of the LineEditor family extracted from th
 
 | Command | Purpose |
 |---|---|
+| [`lineeditor`](lineeditor/README.md) | Distribution router that directly multiplexes the managed `ed`, `red`, and `sed` commands. |
 | [`ed`](ed/README.md) | Interactive and scriptable line-oriented text editor, following the GNU ed 1.22.5 compatibility profile. |
 | [`red`](red/README.md) | Permanently restricted `ed` profile that disables shell execution and limits pathname syntax. |
 | [`sed`](sed/README.md) | Non-interactive stream editor with GNU-style addressing, substitutions, branching, hold space, in-place editing, sandboxing, and NUL-delimited records. |
 
-Each executable directory contains a dedicated man-page-style `README.md` describing its implemented command-line profile, behavior, exit status, platform notes, authorship, and licensing.
+The router supports:
+
+```text
+lineeditor ed [OPTION]...
+lineeditor red [OPTION]...
+lineeditor sed [OPTION]...
+```
+
+It calls the managed command implementations directly and does not spawn the standalone executables. The standalone `ed`, `red`, and `sed` programs remain first-class build and release outputs.
+
+## Installation and distribution
+
+The distribution router is published as the .NET tool package `Icod.LineEditor.Tools`. Install version `1.1.0` with:
+
+```text
+dotnet tool install --global Icod.LineEditor.Tools --version 1.1.0
+```
+
+The installed command is:
+
+```text
+lineeditor
+```
+
+Use the router to select an editor:
+
+```text
+lineeditor ed --help
+lineeditor red --help
+lineeditor sed --help
+```
+
+A missing or unknown router command is a usage error. `lineeditor --help` lists the supported commands and `lineeditor --version` reports the router version. Once a command is selected, arguments and standard streams are passed directly to the managed command implementation and its exit status is returned.
+
+Tagged releases also provide framework-dependent ZIP archives for Windows, Linux, and macOS on x64 and ARM64. Each archive contains all four executable entry points:
+
+```text
+lineeditor
+ed
+red
+sed
+```
+
+Windows archive entries use the `.exe` suffix. Archives also contain the repository `README.md` and `LICENSE` and require the .NET 10 runtime.
+
+**This repository root `README.md` is also the NuGet package README for `Icod.LineEditor.Tools`.** The router project packs this file at the package root as `README.md`, so the NuGet landing page and repository overview share the same installation, architecture, compatibility, and licensing documentation.
+
+The narrower [`lineeditor/README.md`](lineeditor/README.md) documents the router itself; it is not the NuGet package README.
 
 ## `Icod.LineEditor.Ed.Shared`
 
@@ -53,9 +104,14 @@ Published neutral foundation
     Icod.CommandFramework 1.1.0
             ↓ PackageReference
            sed
+
+        ed    red    sed
+          \    |    /
+           lineeditor
+       distribution router
 ```
 
-`ed` and `red` deliberately share the Ed engine through repository-local `ProjectReference` relationships. `sed` remains a separate execution engine. No production project in this repository references `Icod.CoreUtils.Shared`.
+`ed` and `red` deliberately share the Ed engine through repository-local `ProjectReference` relationships. `sed` remains a separate execution engine. The `lineeditor` router references all three command projects only to provide in-process dispatch. No production project in this repository references `Icod.CoreUtils.Shared`.
 
 ## Compatibility philosophy
 
@@ -97,35 +153,56 @@ On Unix-like hosts:
 ./build.sh
 ```
 
+With no section argument, the wrappers use `Debug` and run:
+
+```text
+clean → restore → build → test → pack → validate
+```
+
+The individual `clean`, `restore`, `build`, `test`, `pack`, and `validate` stages may also be requested.
+
 Or build the solution directly:
 
 ```text
 dotnet restore Icod.LineEditor.sln
 dotnet build Icod.LineEditor.sln -c Staging --no-restore
-dotnet test Icod.LineEditor.sln -c Staging --no-build
+dotnet test Icod.LineEditor.sln -c Staging --no-build --no-restore
 ```
 
 The solution defines `Debug`, `Staging`, and `Release` configurations. Release builds treat compiler warnings as errors except for documentation warning `CS1591`.
 
-## Continuous integration
+## Versioning
 
-Pull requests and pushes to `main` are built and tested with .NET 10 on:
+Repository versioning is centralized in the root [`Directory.Build.props`](Directory.Build.props). `VersionPrefix` is the single authoritative release-version literal and is currently `1.1.0`. `Version`, `PackageVersion`, `AssemblyVersion`, and `FileVersion` are derived from it for projects in the repository.
 
-- `windows-latest`
-- `ubuntu-latest`
-- `macos-latest`
+For a tagged release, the `v<semver>` tag must agree with the generated NuGet package version. The release workflow selects packages by their actual nuspec version, so a mismatched tag cannot silently publish a differently versioned package.
 
-The `main` workflow builds the `Release` configuration with `ContinuousIntegrationBuild=true` before running the complete test suite.
+## Continuous integration and release
+
+The repository follows the canonical `uniblab/.github` lifecycle:
+
+- pull requests build and test `Staging` on Windows, Linux, and macOS; Linux additionally packs and verifies generated NuGet artifacts;
+- pushes to `main` run `Release` distribution validation on Windows/Linux/macOS for x64 and ARM64; and
+- `v<semver>` tags contained in the default branch run the `Release` package/archive publication graph.
+
+Executable release archives are produced for `win-x64`, `win-arm64`, `linux-x64`, `linux-arm64`, `osx-x64`, and `osx-arm64`. Each archive contains `lineeditor`, `ed`, `red`, and `sed` (with `.exe` suffixes on Windows), plus the repository `README.md` and `LICENSE`.
+
+The `Icod.LineEditor.Tools` router is a .NET tool package whose installed command is `lineeditor`. Package publication is version-gated by the actual generated nuspec version. NuGet.org Trusted Publishing must authorize the `Icod.LineEditor.Tools` package for repository `uniblab/Icod.LineEditor`, workflow `release.yaml`, and environment `Release`.
+
+See [`packaging/README.md`](packaging/README.md) for the complete build, validation, archive, package-publication, and release contract.
 
 ## Project layout
 
 ```text
 Icod.LineEditor/
+├── Directory.Build.props          centralized repository version
 ├── Icod.LineEditor.Ed.Shared/    mutable Ed/Red engine
 ├── ed/                           standard line editor
 ├── red/                          restricted line editor
 ├── sed/                          stream editor
-├── tests/                        command and engine tests
+├── lineeditor/                   ed/red/sed command router
+├── tests/                        command, engine, and router tests
+├── packaging/                    normalized build/distribution helpers
 ├── docs/history/                 retained architecture and migration history
 ├── Icod.LineEditor.sln
 ├── build.cmd
@@ -136,6 +213,7 @@ Icod.LineEditor/
 
 The executable READMEs are intended to function much like concise manual pages:
 
+- [`lineeditor/README.md`](lineeditor/README.md)
 - [`ed/README.md`](ed/README.md)
 - [`red/README.md`](red/README.md)
 - [`sed/README.md`](sed/README.md)
@@ -144,11 +222,11 @@ For the reusable Ed-family engine, see [`Icod.LineEditor.Ed.Shared/README.md`](I
 
 ## Licensing
 
-The executable tools `ed`, `red`, and `sed` are distributed under the GNU General Public License, version 3 or later. Each tool directory contains its own `LICENSE` file, and the repository root [`LICENSE`](LICENSE) contains the same GPL text.
+The executable tools `lineeditor`, `ed`, `red`, and `sed` are distributed under the GNU General Public License, version 3 or later. Each standalone tool directory contains its own `LICENSE` file, and the repository root [`LICENSE`](LICENSE) contains the same GPL text used by the router distribution.
 
 `Icod.LineEditor.Ed.Shared` is distributed under the GNU Lesser General Public License, version 3 or later. See [`Icod.LineEditor.Ed.Shared/LICENSE`](Icod.LineEditor.Ed.Shared/LICENSE).
 
-The build projects copy their local `README.md` and `LICENSE` into the output directory as `$(AssemblyName).README.md` and `$(AssemblyName).LICENSE.txt` respectively.
+The `Icod.LineEditor.Tools` NuGet package includes the repository root `README.md` and `LICENSE`. Runtime-specific executable archives likewise include the root `README.md` and `LICENSE` alongside `lineeditor`, `ed`, `red`, and `sed`.
 
 ## Upstream inspiration and authorship
 

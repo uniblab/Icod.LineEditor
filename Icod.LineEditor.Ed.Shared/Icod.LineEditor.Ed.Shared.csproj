@@ -6,6 +6,7 @@
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<IsPackable>false</IsPackable>
 		<OutputPath>..\bin\$(Configuration)\</OutputPath>
 		<AssemblyName>Icod.LineEditor.Ed.Shared</AssemblyName>
 		<RootNamespace>Icod.LineEditor.Ed</RootNamespace>
