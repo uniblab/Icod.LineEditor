@@ -60,9 +60,7 @@ foreach ($executable in $executables) {
     } else {
         $executable.AssemblyName
     }
-    Copy-Item \
-        -LiteralPath (Join-Path $publish $file) \
-        -Destination (Join-Path $stage $file)
+    Copy-Item -LiteralPath (Join-Path $publish $file) -Destination (Join-Path $stage $file)
 }
 
 foreach ($support in @('README.md', 'LICENSE')) {
@@ -73,10 +71,7 @@ foreach ($support in @('README.md', 'LICENSE')) {
 }
 
 if ($RuntimeIdentifier.StartsWith('win-')) {
-    Compress-Archive \
-        -LiteralPath $stage \
-        -DestinationPath $archive \
-        -CompressionLevel Optimal
+    Compress-Archive -LiteralPath $stage -DestinationPath $archive -CompressionLevel Optimal
 } else {
     Get-ChildItem -LiteralPath $stage -File |
         Where-Object { $_.Name -in @('lineeditor', 'ed', 'red', 'sed') } |
