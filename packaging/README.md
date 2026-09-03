@@ -27,6 +27,25 @@ The router project identity is `Icod.LineEditor.Router`; its assembly and execut
 
 The `Icod.LineEditor.Tools` package uses the repository root `README.md` as `PackageReadmeFile`. The router-specific `lineeditor/README.md` remains repository documentation and is not the NuGet package README.
 
+## Version contract
+
+Repository versioning is centralized in the root `Directory.Build.props`:
+
+```xml
+<VersionPrefix>1.1.0</VersionPrefix>
+```
+
+`VersionPrefix` is the single authoritative release-version literal. The repository derives:
+
+```text
+Version        = 1.1.0
+PackageVersion = 1.1.0
+AssemblyVersion = 1.1.0.0
+FileVersion     = 1.1.0.0
+```
+
+Production projects inherit these values unless a future project has an explicit reason to override them. Release tags must agree with the generated package version; `SelectReleasePackages.ps1` verifies the actual nuspec version before publication.
+
 ## Shared scripts
 
 ### `RepositoryTools.psm1`
@@ -168,11 +187,11 @@ That `README.md` is sourced from the repository root and packed at the NuGet pac
 
 ## Release checklist
 
-Before pushing a release tag:
+Before pushing release tag `v1.1.0`:
 
-1. confirm the intended package/version metadata is present in MSBuild;
-2. confirm `lineeditor --version` and command documentation are consistent with that release;
-3. confirm the root README installation examples and package identity are current;
+1. confirm `Directory.Build.props` still declares `VersionPrefix` `1.1.0`;
+2. confirm `lineeditor --version` reports `1.1.0` from assembly informational version metadata;
+3. confirm the root README installation example and package identity are current;
 4. confirm PR Staging validation is green;
 5. merge to `main` and require the six-runner Release validation to pass; and
-6. only then push the matching `v<semver>` tag.
+6. only then push tag `v1.1.0`.
