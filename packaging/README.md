@@ -27,6 +27,28 @@ The router project identity is `Icod.LineEditor.Router`; its assembly and execut
 
 The `Icod.LineEditor.Tools` package uses the repository root `README.md` as `PackageReadmeFile`. The router-specific `lineeditor/README.md` remains repository documentation and is not the NuGet package README.
 
+## NuGet package boundary
+
+Only the router project is an intended NuGet package producer.
+
+The repository explicitly declares:
+
+```text
+Icod.LineEditor.Ed.Shared  IsPackable=false
+ed                         IsPackable=false
+red                        IsPackable=false
+sed                        IsPackable=false
+lineeditor                  packable as Icod.LineEditor.Tools
+```
+
+Therefore solution-wide `dotnet pack` must produce exactly the router package for the coordinated release version:
+
+```text
+Icod.LineEditor.Tools.1.1.0.nupkg
+```
+
+The standalone `ed`, `red`, and `sed` commands remain release artifacts through the six RID ZIP archives; disabling NuGet packing does not remove them from builds, tests, or executable archive publication. `Icod.LineEditor.Ed.Shared` remains a repository-local implementation library.
+
 ## Version contract
 
 Repository versioning is centralized in the root `Directory.Build.props`:
@@ -38,8 +60,8 @@ Repository versioning is centralized in the root `Directory.Build.props`:
 `VersionPrefix` is the single authoritative release-version literal. The repository derives:
 
 ```text
-Version        = 1.1.0
-PackageVersion = 1.1.0
+Version         = 1.1.0
+PackageVersion  = 1.1.0
 AssemblyVersion = 1.1.0.0
 FileVersion     = 1.1.0.0
 ```
@@ -68,7 +90,7 @@ Individual stages may be requested as `clean`, `restore`, `build`, `test`, `pack
 
 ### `VerifyPackageArtifact.ps1`
 
-Validates generated `.nupkg` files supplied by the caller. It verifies package metadata, declared package README presence, and .NET tool metadata shape where applicable. The script supports repositories in which a given configuration legitimately produces no packages.
+Validates generated `.nupkg` files supplied by the caller. It verifies package metadata, declared package README presence, and .NET tool metadata shape where applicable. For this repository, normal solution packing is expected to produce only `Icod.LineEditor.Tools`.
 
 ### `VerifyDistribution.ps1`
 
@@ -155,7 +177,7 @@ archives ─────────────────────┘
 
 Only packages whose nuspec version matches the release tag are selected. NuGet.org and GitHub Packages consume the same selected package artifact and use `--skip-duplicate`, allowing safe retries after partial publication.
 
-GitHub Release creation waits for all applicable package-publication and archive jobs, writes `SHA256SUMS.txt`, and attaches the selected NuGet packages plus all six executable archives.
+GitHub Release creation waits for all applicable package-publication and archive jobs, writes `SHA256SUMS.txt`, and attaches the selected NuGet package plus all six executable archives.
 
 ## NuGet Trusted Publishing
 
@@ -165,7 +187,7 @@ NuGet.org publication requires:
 - an Actions secret named `NUGET_USER`; and
 - a NuGet.org Trusted Publishing policy authorizing repository `uniblab/Icod.LineEditor`, workflow `release.yaml`, and environment `Release`.
 
-The package scope must authorize the package actually being published. For the router distribution that package ID is:
+The package scope must authorize the package actually being published:
 
 ```text
 Icod.LineEditor.Tools
@@ -190,8 +212,9 @@ That `README.md` is sourced from the repository root and packed at the NuGet pac
 Before pushing release tag `v1.1.0`:
 
 1. confirm `Directory.Build.props` still declares `VersionPrefix` `1.1.0`;
-2. confirm `lineeditor --version` reports `1.1.0` from assembly informational version metadata;
-3. confirm the root README installation example and package identity are current;
-4. confirm PR Staging validation is green;
-5. merge to `main` and require the six-runner Release validation to pass; and
-6. only then push tag `v1.1.0`.
+2. confirm solution-wide pack produces only `Icod.LineEditor.Tools.1.1.0.nupkg`;
+3. confirm `lineeditor --version` reports `1.1.0` from assembly informational version metadata;
+4. confirm the root README installation example and package identity are current;
+5. confirm PR Staging validation is green;
+6. merge to `main` and require the six-runner Release validation to pass; and
+7. only then push tag `v1.1.0`.
