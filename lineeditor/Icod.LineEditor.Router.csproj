@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>net10.0</TargetFramework>
+		<LangVersion>13.0</LangVersion>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<AssemblyName>lineeditor</AssemblyName>
+		<RootNamespace>Icod.LineEditor.Router</RootNamespace>
+		<Configurations>Debug;Release;Staging</Configurations>
+		<PackAsTool>true</PackAsTool>
+		<ToolCommandName>lineeditor</ToolCommandName>
+		<PackageId>Icod.LineEditor.Tools</PackageId>
+		<Authors>Timothy J. Bruce</Authors>
+		<Description>Managed command router for the Icod.LineEditor ed, red, and sed tools.</Description>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
+	</PropertyGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\ed\Icod.LineEditor.Ed.csproj" />
+		<ProjectReference Include="..\red\Icod.LineEditor.Red.csproj" />
+		<ProjectReference Include="..\sed\Icod.LineEditor.Sed.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+		<Content Include="README.md" Pack="true" PackagePath="\" />
+		<Content Include="..\LICENSE" Link="LICENSE" Pack="true" PackagePath="\" />
+	</ItemGroup>
+	<PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+		<WarningLevel>2</WarningLevel>
+		<DebugSymbols>true</DebugSymbols>
+		<DebugType>full</DebugType>
+		<Optimize>false</Optimize>
+		<DefineConstants>DEBUG;TRACE</DefineConstants>
+		<TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)' == 'Staging' ">
+		<WarningLevel>3</WarningLevel>
+		<DebugSymbols>true</DebugSymbols>
+		<DebugType>full</DebugType>
+		<Optimize>false</Optimize>
+		<DefineConstants>TRACE</DefineConstants>
+		<TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+		<WarningLevel>4</WarningLevel>
+		<DebugType>portable</DebugType>
+		<Optimize>true</Optimize>
+		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+		<WarningsNotAsErrors>CS1591</WarningsNotAsErrors>
+	</PropertyGroup>
+</Project>
