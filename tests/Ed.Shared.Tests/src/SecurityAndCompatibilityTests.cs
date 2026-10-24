@@ -1,8 +1,10 @@
+extern alias Expressions;
+
 namespace Icod.LineEditor.Ed.Shared.Tests;
 
 using System.Diagnostics;
 using System.Text;
-using Icod.CommandFramework.RegularExpressions;
+using Expressions::Icod.CommandFramework.RegularExpressions;
 using Icod.LineEditor.Ed;
 
 public sealed class SecurityAndCompatibilityTests {

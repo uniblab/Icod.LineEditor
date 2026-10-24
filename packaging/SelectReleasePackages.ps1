@@ -38,7 +38,7 @@ $packages = @(
 )
 foreach ($package in $packages) {
     $metadata = Get-PackageMetadata -PackagePath $package.FullName
-    if ($metadata.Version -ne $ExpectedVersion) {
+    if ($metadata.Version -ne $ExpectedVersion -or $metadata.Id -ne 'Icod.LineEditor.Tools') {
         continue
     }
     Copy-Item -LiteralPath $package.FullName -Destination (Join-Path $DestinationDirectory $package.Name)
@@ -46,6 +46,9 @@ foreach ($package in $packages) {
 }
 
 $hasPackages = 0 -lt $selected.Count
+if (1 -ne $selected.Count) {
+    throw "Expected exactly one Icod.LineEditor.Tools package for release $ExpectedVersion; selected $($selected.Count)."
+}
 if (-not [string]::IsNullOrWhiteSpace($GitHubOutputPath)) {
     "has_packages=$($hasPackages.ToString().ToLowerInvariant())" >> $GitHubOutputPath
     "package_count=$($selected.Count)" >> $GitHubOutputPath

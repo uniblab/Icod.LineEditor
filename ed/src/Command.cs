@@ -1,3 +1,5 @@
+extern alias Expressions;
+
 namespace Icod.LineEditor.Ed;
 
 using System.Globalization;
@@ -5,7 +7,7 @@ using System.Text;
 using Icod.CommandFramework.CommandLine;
 using Icod.CommandFramework.Diagnostics;
 using Icod.CommandFramework.Records;
-using Icod.CommandFramework.RegularExpressions;
+using Expressions::Icod.CommandFramework.RegularExpressions;
 
 /// <summary>
 /// Implements the GNU-compatible line editor over <see cref="EditorEngine"/>.

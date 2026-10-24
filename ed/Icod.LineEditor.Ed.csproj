@@ -18,6 +18,7 @@
 	<ItemGroup>
 		<ProjectReference Include="..\Icod.LineEditor.Ed.Shared\Icod.LineEditor.Ed.Shared.csproj" />
 		<PackageReference Include="Icod.CommandFramework" Version="2.1.0" />
+		<PackageReference Include="Icod.Expressions" Version="0.1.0-alpha.1" Aliases="Expressions" />
 	</ItemGroup>
 	<PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
 		<ErrorReport>prompt</ErrorReport>

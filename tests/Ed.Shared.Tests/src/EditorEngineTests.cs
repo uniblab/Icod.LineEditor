@@ -1,10 +1,23 @@
+extern alias Expressions;
+
 namespace Icod.LineEditor.Ed.Shared.Tests;
 
 using System.Text;
-using Icod.CommandFramework.RegularExpressions;
+using Expressions::Icod.CommandFramework.RegularExpressions;
 using Icod.LineEditor.Ed;
 
 public sealed class EditorEngineTests {
+	[Fact]
+	public void InjectableRegexProviderUsesExpressionsAssembly() {
+		var constructor = typeof( EditorEngine ).GetConstructors().Single(
+			candidate => candidate.GetParameters().Length == 4
+		);
+		Assert.Equal(
+			"Icod.Expressions",
+			constructor.GetParameters()[3].ParameterType.Assembly.GetName().Name
+		);
+	}
+
 	[Fact]
 	public async Task ExecutesMutationAddressMarkCutAndUndoCommands() {
 		var engine = CreateEngine();

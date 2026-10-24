@@ -21,19 +21,16 @@ The project deliberately has no runtime reference to `Icod.DiffUtils.Shared`. Co
 
 ## Dependency direction
 
-The permanent repository boundary is:
+The repository dependency boundary is:
 
-```text
-Published neutral foundation
-    Icod.CommandFramework 2.1.0
-            ↓ PackageReference
-    Icod.LineEditor.Ed.Shared
-          ↓             ↓
-        ed               red
-          ProjectReference
-```
+| Project | Dependencies |
+|---|---|
+| `Icod.LineEditor.Ed.Shared` | `Icod.CommandFramework 2.1.0`, `Icod.Expressions 0.1.0-alpha.1`, `Icod.Processes 1.2.0` |
+| `ed`, `red` | The repository-local shared engine and aliased `Icod.Expressions` regex providers |
 
-The shared engine consumes neutral command-line, record, regular-expression, process, temporary-file, filesystem, metadata, traversal, and transactional-replacement contracts from the published `Icod.CommandFramework` package.
+The shared engine consumes GNU regular-expression contracts from published `Icod.Expressions 0.1.0-alpha.1`. It continues to consume record, process, temporary-file, filesystem, metadata, traversal, and transactional-replacement contracts from published `Icod.CommandFramework 2.1.0`. The Expressions package currently retains the `Icod.CommandFramework.RegularExpressions` namespace, so source files use an assembly alias to distinguish the types.
+
+The public `EditorEngine` provider parameter now has `Icod.Expressions` assembly identity. In-process callers injecting a provider must reference that package and update their provider type; this is a source and binary API change in the planned `2.0.0-alpha.1` prerelease. Additional API refactoring may follow before the stable 2.0 release.
 
 `ed` and `red` consume this engine through repository-local `ProjectReference` relationships. The library has no source-tree dependency on `Icod.CoreUtils.Shared`.
 
