@@ -6,6 +6,17 @@ using Icod.LineEditor.Ed;
 
 public sealed class EditorEngineTests {
 	[Fact]
+	public void InjectableRegexProviderUsesExpressionsAssembly() {
+		var constructor = Assert.Single(
+			typeof( EditorEngine ).GetConstructors().Where( candidate => candidate.GetParameters().Length == 4 )
+		);
+		Assert.Equal(
+			"Icod.Expressions",
+			constructor.GetParameters()[3].ParameterType.Assembly.GetName().Name
+		);
+	}
+
+	[Fact]
 	public async Task ExecutesMutationAddressMarkCutAndUndoCommands() {
 		var engine = CreateEngine();
 		engine.Load( Lines( "one", "two", "three" ) );
