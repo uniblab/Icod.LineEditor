@@ -95,7 +95,7 @@ Editor-command errors can interact with `--loose-exit-status` as described above
 
 ## PLATFORM NOTES
 
-The project targets .NET 10 with C# 13 and is tested on Windows, Linux, and macOS. Neutral command-line, regular-expression, process, record, filesystem, and transactional-replacement mechanics come from the published `Icod.CommandFramework` package. Mutable Ed-family behavior remains in `Icod.LineEditor.Ed.Shared`.
+The project targets .NET 10 with C# 13 and is tested on Windows, Linux, and macOS. GNU regular-expression matching comes from `Icod.Expressions`; neutral command-line, process, record, filesystem, and transactional-replacement mechanics remain in `Icod.CommandFramework`. Mutable Ed-family behavior remains in `Icod.LineEditor.Ed.Shared`.
 
 ## AUTHORS
 

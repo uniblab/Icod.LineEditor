@@ -1,14 +1,16 @@
+extern alias Expressions;
+
 namespace Icod.LineEditor.Ed.Shared.Tests;
 
 using System.Text;
-using Icod.CommandFramework.RegularExpressions;
+using Expressions::Icod.CommandFramework.RegularExpressions;
 using Icod.LineEditor.Ed;
 
 public sealed class EditorEngineTests {
 	[Fact]
 	public void InjectableRegexProviderUsesExpressionsAssembly() {
-		var constructor = Assert.Single(
-			typeof( EditorEngine ).GetConstructors().Where( candidate => candidate.GetParameters().Length == 4 )
+		var constructor = typeof( EditorEngine ).GetConstructors().Single(
+			candidate => candidate.GetParameters().Length == 4
 		);
 		Assert.Equal(
 			"Icod.Expressions",

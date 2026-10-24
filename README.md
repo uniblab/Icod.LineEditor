@@ -40,7 +40,7 @@ It calls the managed command implementations directly and does not spawn the sta
 
 ## Installation and distribution
 
-The distribution router is published as the .NET tool package `Icod.LineEditor.Tools`. Install version `1.1.1` with:
+The last stable distribution router is published as the .NET tool package `Icod.LineEditor.Tools`. Install version `1.1.1` with:
 
 ```text
 dotnet tool install --global Icod.LineEditor.Tools --version 1.1.1
@@ -183,7 +183,9 @@ The solution defines `Debug`, `Staging`, and `Release` configurations. Release b
 
 ## Versioning
 
-Repository versioning is centralized in the root [`Directory.Build.props`](Directory.Build.props). `VersionPrefix` is the single authoritative release-version literal and is currently `1.1.1`. `Version`, `PackageVersion`, `AssemblyVersion`, and `FileVersion` are derived from it for projects in the repository.
+Repository versioning is centralized in the root [`Directory.Build.props`](Directory.Build.props). This branch prepares the unpublished `2.0.0-alpha.1` prerelease: `VersionPrefix` is `2.0.0`, `VersionSuffix` is `alpha.1`, and the package version combines them. `AssemblyVersion` and `FileVersion` remain numeric `2.0.0.0`.
+
+The prerelease moves the `ed`/`red` injectable regex provider from the CommandFramework assembly to `Icod.Expressions 0.1.0-alpha.1`. In-process callers of `EditorEngine` must reference `Icod.Expressions` and pass its provider type; this changes source and binary API identity. The command-line interfaces remain the same. Further API refactoring may occur before stable 2.0. `sed` will migrate in a separate change.
 
 For a tagged release, the `v<semver>` tag must agree with the generated NuGet package version. The release workflow selects packages by their actual nuspec version, so a mismatched tag cannot silently publish a differently versioned package.
 

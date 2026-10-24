@@ -1,9 +1,11 @@
+extern alias Expressions;
+
 namespace Icod.LineEditor.Ed;
 
 using System.Globalization;
 using System.Text;
 using Icod.CommandFramework.Records;
-using Icod.CommandFramework.RegularExpressions;
+using Expressions::Icod.CommandFramework.RegularExpressions;
 
 /// <summary>
 /// Executes Ed scripts over a mutable, stable-identity line buffer using injectable regular-expression,
@@ -34,7 +36,7 @@ public sealed class EditorEngine {
 
 	/// <summary>Initializes an engine from one immutable capability profile.</summary>
 	/// <param name="profile">The policy and capabilities exposed to the engine.</param>
-	/// <param name="regularExpressionProvider">The Shared GNU regular-expression provider.</param>
+	/// <param name="regularExpressionProvider">The Icod.Expressions GNU regular-expression provider.</param>
 	public EditorEngine(
 		EditorCapabilityProfile profile,
 		IRegularExpressionProvider regularExpressionProvider
@@ -50,7 +52,7 @@ public sealed class EditorEngine {
 	/// <param name="securityPolicy">The immutable parser and dispatch policy.</param>
 	/// <param name="fileAccess">The filename-bearing capability.</param>
 	/// <param name="processAccess">The process capability.</param>
-	/// <param name="regularExpressionProvider">The Shared GNU BRE provider.</param>
+	/// <param name="regularExpressionProvider">The Icod.Expressions GNU BRE provider.</param>
 	public EditorEngine(
 		EditorSecurityPolicy securityPolicy,
 		IEditorFileAccess fileAccess,
@@ -71,7 +73,7 @@ public sealed class EditorEngine {
 	/// <summary>Creates a restricted engine rooted at the supplied working directory.</summary>
 	/// <param name="workingDirectory">The captured working directory.</param>
 	/// <param name="fileAccess">The underlying file capability to constrain beneath the captured directory.</param>
-	/// <param name="regularExpressionProvider">An optional Shared GNU BRE provider.</param>
+	/// <param name="regularExpressionProvider">An optional Icod.Expressions GNU BRE provider.</param>
 	/// <returns>The configured engine.</returns>
 	public static EditorEngine CreateRestricted(
 		string workingDirectory,

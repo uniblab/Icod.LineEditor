@@ -13,6 +13,7 @@ foreach($package in $packages){
     $archive=[System.IO.Compression.ZipFile]::OpenRead($package.FullName)
     try{
         if(-not [string]::IsNullOrWhiteSpace($metadata.Readme) -and $null -eq ($archive.Entries|Where-Object{$_.FullName -eq $metadata.Readme}|Select-Object -First 1)){throw "Package '$($package.Name)' declares a missing readme."}
+        if('Icod.LineEditor.Tools' -eq $metadata.Id -and $null -eq $archive.GetEntry('tools/net10.0/any/Icod.Expressions.dll')){throw "Package '$($package.Name)' is missing the Icod.Expressions runtime assembly."}
     }finally{$archive.Dispose()}
 }
 if(-not [string]::IsNullOrWhiteSpace($GitHubOutputPath)){"package_count=$($packages.Count)" >> $GitHubOutputPath;"has_packages=$((0 -lt $packages.Count).ToString().ToLowerInvariant())" >> $GitHubOutputPath}
