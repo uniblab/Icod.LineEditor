@@ -1,3 +1,5 @@
+extern alias Expressions;
+
 namespace Icod.LineEditor.Sed;
 
 using System;
@@ -6,7 +8,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
-using Icod.CommandFramework.RegularExpressions;
+using Expressions::Icod.CommandFramework.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using Icod.CommandFramework.CommandLine;

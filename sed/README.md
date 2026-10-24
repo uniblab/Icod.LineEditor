@@ -116,9 +116,9 @@ y        transliterate characters
 
 ## REGULAR EXPRESSIONS
 
-Regular expressions use the managed GNU BRE/ERE providers supplied by `Icod.CommandFramework`. Sed retains command-specific handling for empty-expression reuse, address and substitution modifiers, GNU escape preprocessing, occurrence selection, zero-length match progression, replacement expansion, and diagnostic presentation.
+Regular expressions use the managed GNU BRE/ERE providers supplied by `Icod.Expressions`. Sed retains command-specific handling for empty-expression reuse, address and substitution modifiers, GNU escape preprocessing, occurrence selection, zero-length match progression, replacement expansion, and diagnostic presentation.
 
-`--posix` narrows GNU extension handling without replacing the managed regular-expression engine. Locale-sensitive text behavior is selected through the command framework's text and regular-expression contracts.
+`--posix` narrows GNU extension handling without replacing the managed regular-expression engine. Locale-sensitive text behavior is selected through the command framework's text contracts and the Expressions regular-expression character classes.
 
 ## RECORD AND TEXT SEMANTICS
 
@@ -149,7 +149,7 @@ In-place editing uses the transactional replacement foundation supplied through 
 
 ## PLATFORM NOTES
 
-The project targets .NET 10 with C# 13 and is tested on Windows, Linux, and macOS. The core stream-editing engine is managed and does not invoke an external `sed` executable. Host-dependent process, filesystem, temporary-file, regular-expression, record, and transactional-replacement mechanics are supplied through .NET and `Icod.CommandFramework`.
+The project targets .NET 10 with C# 13 and is tested on Windows, Linux, and macOS. The core stream-editing engine is managed and does not invoke an external `sed` executable. GNU regular expressions come from `Icod.Expressions`; host-dependent process, filesystem, temporary-file, record, text, and transactional-replacement mechanics remain in .NET and `Icod.CommandFramework`.
 
 ## AUTHORS
 
