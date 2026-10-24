@@ -99,27 +99,14 @@ There is intentionally **no** general `Icod.LineEditor.Shared` project. The comp
 
 ## Architecture
 
-The permanent dependency direction is:
+The current dependency direction is:
 
-```text
-Published neutral foundation
-    Icod.CommandFramework 2.1.0
-            ↓ PackageReference
-    ┌──────────────────────────────┐
-    │ Icod.LineEditor.Ed.Shared    │
-    └──────────────────────────────┘
-          ↓ ProjectReference
-       ed             red
-
-    Icod.CommandFramework 2.1.0
-            ↓ PackageReference
-           sed
-
-        ed    red    sed
-          \    |    /
-           lineeditor
-       distribution router
-```
+| Project | Dependencies |
+|---|---|
+| `Icod.LineEditor.Ed.Shared` | `Icod.CommandFramework 2.1.0`, `Icod.Expressions 0.1.0-alpha.1`, `Icod.Processes 1.2.0` |
+| `ed`, `red` | The repository-local Ed engine and aliased Expressions regex providers |
+| `sed` | CommandFramework for command and text services, Expressions for GNU regex matching |
+| `lineeditor` | Repository-local `ed`, `red`, and `sed` commands |
 
 `ed` and `red` deliberately share the Ed engine through repository-local `ProjectReference` relationships. `sed` remains a separate execution engine. The `lineeditor` router references all three command projects only to provide in-process dispatch. No production project in this repository references `Icod.CoreUtils.Shared`.
 
@@ -185,7 +172,7 @@ The solution defines `Debug`, `Staging`, and `Release` configurations. Release b
 
 Repository versioning is centralized in the root [`Directory.Build.props`](Directory.Build.props). This branch prepares the unpublished `2.0.0-alpha.1` prerelease: `VersionPrefix` is `2.0.0`, `VersionSuffix` is `alpha.1`, and the package version combines them. `AssemblyVersion` and `FileVersion` remain numeric `2.0.0.0`.
 
-The prerelease moves the `ed`/`red` injectable regex provider from the CommandFramework assembly to `Icod.Expressions 0.1.0-alpha.1`. In-process callers of `EditorEngine` must reference `Icod.Expressions` and pass its provider type; this changes source and binary API identity. The command-line interfaces remain the same. Further API refactoring may occur before stable 2.0. `sed` will migrate in a separate change.
+The prerelease moves the `ed`/`red` injectable regex provider and `sed` GNU regex matching from the CommandFramework assembly to `Icod.Expressions 0.1.0-alpha.1`. In-process callers of `EditorEngine` must reference `Icod.Expressions` and pass its provider type; this changes source and binary API identity. The command-line interfaces remain the same. Further API refactoring may occur before stable 2.0.
 
 For a tagged release, the `v<semver>` tag must agree with the generated NuGet package version. The release workflow selects packages by their actual nuspec version, so a mismatched tag cannot silently publish a differently versioned package.
 
