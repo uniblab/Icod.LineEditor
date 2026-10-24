@@ -7,6 +7,15 @@ using Xunit;
 /// Verifies the public and private boundaries retained by the LE1 source decomposition.
 /// </summary>
 public sealed class SedModuleBoundaryTests {
+	/// <summary>Verifies Sed's compiled matcher uses the published Expressions type.</summary>
+	[Fact]
+	public void CompiledRegexUsesExpressionsAssembly() {
+		var type = typeof( Icod.LineEditor.Sed.Command ).GetNestedType(
+			"SedCompiledRegularExpression", BindingFlags.NonPublic
+		)!;
+		var constructor = type.GetConstructors( BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic ).Single();
+		Assert.Equal( "Icod.Expressions", constructor.GetParameters()[0].ParameterType.Assembly.GetName().Name );
+	}
 
 	/// <summary>
 	/// Verifies that the established synchronous and asynchronous command signatures remain available.
